@@ -1,0 +1,43 @@
+<div class="card text-center p-3" [class.seccion-invisible]="formularioVisible">
+    <div class="row fw-bold">
+        <div class="col-12"><label>Lista de Animales</label></div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            @for (elemento of animales; track elemento) {
+                <app-card [myCard]="elemento"></app-card>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-end">
+            <button class="btn btn-primary" (click)="flipFormulario()">+ Agregar animal</button>
+        </div>
+    </div>
+</div>
+
+<div class="card row p-3" [class.seccion-invisible]="!formularioVisible">
+    <div class="col-12 text-start">
+        <h5 class="mb-3">Agregar Nuevo Animal</h5>
+        <form>
+            <div class="mb-3">
+                <label for="animalNombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" [(ngModel)]=title name="title">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Imagen (URL)</label>
+                <input type="text" class="form-control" [(ngModel)]=image name="image">
+            </div>
+
+            <div class="mb-3">
+                <label for="animalDescripcion" class="form-label">Descripción</label>
+                <textarea class="form-control" rows="3" [(ngModel)]=description name="description"></textarea>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-success" (click)="addAnimal()">Guardar Animal</button>
+            </div>
+        </form>
+    </div>
+</div>
