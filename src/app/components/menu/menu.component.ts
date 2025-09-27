@@ -15,11 +15,13 @@ export class MenuComponent {
             image: "img/gorila.jpg",
             title: "Gorila",
             description: "El gorila es un animal grande y fuerte que vive en las selvas de África. Son conocidos por su inteligencia y su comportamiento social.",
+            especies: ["Gorila de montaña", "Gorila de llanura"]
         },
         {
             image: "img/tigre.jpg",
             title: "Tigre",
             description: "El tigre es un felino grande y poderoso que habita en Asia. Son conocidos por su pelaje rayado y su habilidad para cazar.",
+            especies: ["Tigre de Bengala", "Tigre Siberiano"]
         }
     ]
 
@@ -28,6 +30,9 @@ export class MenuComponent {
     image: string = "";
     title: string = "";
     description: string = "";
+    especies: string[] = [];
+
+    selectedIndex: number = 0;
 
     flipFormulario(){
         this.formularioVisible = !this.formularioVisible;
@@ -37,7 +42,8 @@ export class MenuComponent {
         const nuevoAnimal: Card = {
             image: this.image,
             title: this.title,
-            description: this.description
+            description: this.description,
+            especies: this.especies
         };
 
         this.animales.push(nuevoAnimal);
@@ -45,7 +51,13 @@ export class MenuComponent {
         this.image = "";
         this.title = "";
         this.description = "";
+        this.especies = [];
 
         this.flipFormulario();
+    }
+
+    recibirValor(valorRecibido: number){
+        this.selectedIndex = valorRecibido;
+        console.log("Valor recibido en el componente Card: " + valorRecibido);
     }
 }

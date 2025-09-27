@@ -3,10 +3,22 @@
         <div class="col-12"><label>Lista de Animales</label></div>
     </div>
     <div class="row">
-        <div class="col-12">
-            @for (elemento of animales; track elemento) {
-                <app-card [myCard]="elemento"></app-card>
+        <div class="col-8">
+            @for (elemento of animales; track elemento; let indice = $index) {
+                <app-card [index]="indice" (selectedCard)="recibirValor($event)" [myCard]="elemento"></app-card>
             }
+        </div>
+        <div class="col-4">
+            <div class="row">
+                <div class="col-12"><label class="fw-bold">Especies</label></div>
+            </div>
+            <div class="card">
+                <ul>
+                    @for(  especie of animales[selectedIndex].especies; track especie ) {
+                        <li class="list-unstyled">{{especie}}</li>
+                    }
+                </ul>
+            </div>
         </div>
     </div>
     <div class="row">

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Card } from '../../interface/card';
 
 @Component({
@@ -9,4 +9,13 @@ import { Card } from '../../interface/card';
 })
 export class CardComponent {
     @Input() myCard!: Card;
+
+    @Output() selectedCard = new EventEmitter<number>();
+
+    @Input() index: number = 0;
+
+    selectCard(){
+        console.log("Se va a emitir el evento selectedCard");
+        this.selectedCard.emit(this.index);
+    }
 }
