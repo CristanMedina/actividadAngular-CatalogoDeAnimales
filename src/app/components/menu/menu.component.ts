@@ -34,6 +34,12 @@ export class MenuComponent {
 
     selectedIndex: number = 0;
 
+    addEspecie(especieAAgregar: string) {
+      if (especieAAgregar.trim() !== '') {
+        this.especies.push(especieAAgregar.trim());
+      }
+    }
+
     flipFormulario(){
         this.formularioVisible = !this.formularioVisible;
     }

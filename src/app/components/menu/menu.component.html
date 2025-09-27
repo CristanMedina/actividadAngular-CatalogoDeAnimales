@@ -14,8 +14,10 @@
             </div>
             <div class="card">
                 <ul>
-                    @for(  especie of animales[selectedIndex].especies; track especie ) {
-                        <li class="list-unstyled">{{especie}}</li>
+                    @if (animales.length > 0) {
+                        @for(  especie of animales[selectedIndex].especies; track especie ) {
+                            <li class="list-unstyled">{{especie}}</li>
+                        }
                     }
                 </ul>
             </div>
@@ -31,7 +33,7 @@
 <div class="card row p-3" [class.seccion-invisible]="!formularioVisible">
     <div class="col-12 text-start">
         <h5 class="mb-3">Agregar Nuevo Animal</h5>
-        <form>
+        <form (submit)="$event.preventDefault()">
             <div class="mb-3">
                 <label for="animalNombre" class="form-label">Nombre</label>
                 <input type="text" class="form-control" [(ngModel)]=title name="title">
@@ -47,8 +49,21 @@
                 <textarea class="form-control" rows="3" [(ngModel)]=description name="description"></textarea>
             </div>
 
+            <div class="mb-3">
+                <label for="especieInput" class="form-label">Especies</label>
+                <div class="input-group">
+                    <input #nuevaEspecie type="text" id="especieInput" class="form-control" placeholder="Escriba una especie y presione '+' o Enter" (keydown.enter)="addEspecie(nuevaEspecie.value); nuevaEspecie.value = ''">
+                    <button class="btn btn-outline-secondary" type="button" (click)="addEspecie(nuevaEspecie.value); nuevaEspecie.value = ''">+</button>
+                </div>
+                <ul class="list-group mt-2">
+                    @for (item of especies; track item) {
+                        <li class="list-group-item py-1">{{item}}</li>
+                    }
+                </ul>
+            </div>
+
             <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-success" (click)="addAnimal()">Guardar Animal</button>
+                <button type="button" class="btn btn-success" (click)="addAnimal()">Guardar Animal</button>
             </div>
         </form>
     </div>
